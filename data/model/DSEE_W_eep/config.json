@@ -1,0 +1,43 @@
+{
+  "name": "W",
+  "arch": "nsf (zuko NSF)",
+  "transforms": 10,
+  "hidden": 256,
+  "hidden_layers": 10,
+  "n_features": 6,
+  "n_context": 18,
+  "n_context_disk": 24,
+  "label_take": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    9,
+    10,
+    11,
+    14,
+    15,
+    17,
+    19,
+    20,
+    21,
+    22,
+    23
+  ],
+  "global_step": 1642400,
+  "tags": "pyeep-1.2",
+  "inputs": "22 physics + EEP + initial mass (6 dead physics columns dropped -> 18 used)",
+  "outputs": [
+    "log_Teff",
+    "log_g",
+    "log_L",
+    "log_R",
+    "center_he4",
+    "he_core_mass"
+  ],
+  "format": "data/format/DSEE_mcdsep_eep_format.json",
+  "selection": "lowest per-phase RMSE on validation shards"
+}

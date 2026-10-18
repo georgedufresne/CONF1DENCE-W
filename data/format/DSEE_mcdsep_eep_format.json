@@ -1,0 +1,292 @@
+{
+  "SEM_type": "DSEE_mcdsep_eep",
+  "track_header": [
+    "star_age",
+    "star_mass",
+    "star_mdot",
+    "he_core_mass",
+    "c_core_mass",
+    "log_L",
+    "log_LH",
+    "log_LHe",
+    "log_Teff",
+    "log_R",
+    "log_g",
+    "surface_h1",
+    "surface_he3",
+    "surface_he4",
+    "surface_c12",
+    "surface_o16",
+    "log_center_T",
+    "log_center_Rho",
+    "center_gamma",
+    "center_h1",
+    "center_he4",
+    "center_c12"
+  ],
+  "age_col": "star_age",
+  "MC_params": [
+    "FeH",
+    "He Abundance",
+    "AlphaFe",
+    "Mixing Length",
+    "He Diffusion",
+    "Heavy Element Diffusion",
+    "Surface Boundary Condition",
+    "Envelope Overshooting",
+    "Core Overshooting",
+    "PP",
+    "He3+He3",
+    "He3+He4",
+    "P+C12",
+    "P+C13",
+    "P+N14",
+    "P+O16",
+    "Low Temp Opacity",
+    "High Temp Opacity",
+    "Triple-Alpha",
+    "Plasma Neutrino Loss",
+    "Conductive Opacity"
+  ],
+  "tracks_sample_format": [
+    "DSEE",
+    ".",
+    "mc",
+    "mc_num",
+    ".tar"
+  ],
+  "track_sample_format": [
+    "m",
+    "mass",
+    ".mc",
+    "mc_num",
+    ".gz"
+  ],
+  "training_sample_format": [
+    "GC_name",
+    ".h5"
+  ],
+  "data_header": [
+    "log_Teff",
+    "log_g",
+    "log_L",
+    "log_R",
+    "center_he4",
+    "he_core_mass"
+  ],
+  "data_scaler": [
+    "linear_rescale",
+    "linear_rescale",
+    "linear_rescale",
+    "linear_rescale",
+    "log_rescale",
+    "linear_rescale"
+  ],
+  "data_scale": [
+    [
+      3.0,
+      5.0
+    ],
+    [
+      -1.0,
+      5.5
+    ],
+    [
+      -3.0,
+      5.0
+    ],
+    [
+      -2.0,
+      4.0
+    ],
+    [
+      -2.0,
+      0.0
+    ],
+    [
+      0.0,
+      1.0
+    ]
+  ],
+  "label_header": [
+    "FeH",
+    "He Abundance",
+    "AlphaFe",
+    "Mixing Length",
+    "He Diffusion",
+    "Heavy Element Diffusion",
+    "Surface Boundary Condition",
+    "Envelope Overshooting",
+    "Core Overshooting",
+    "PP",
+    "He3+He3",
+    "He3+He4",
+    "P+C12",
+    "P+C13",
+    "P+N14",
+    "P+O16",
+    "C12+He4",
+    "Low Temp Opacity",
+    "High Temp Opacity",
+    "Triple-Alpha",
+    "Plasma Neutrino Loss",
+    "Conductive Opacity",
+    "EEP",
+    "mass"
+  ],
+  "label_scaler": [
+    "None",
+    "None",
+    "None",
+    "linear_rescale",
+    "linear_rescale",
+    "linear_rescale",
+    "None",
+    "linear_rescale",
+    "linear_rescale",
+    "normal",
+    "normal",
+    "normal",
+    "normal",
+    "normal",
+    "normal",
+    "normal",
+    "normal",
+    "linear_rescale",
+    "normal",
+    "normal",
+    "normal",
+    "normal",
+    "linear_rescale",
+    "linear_rescale"
+  ],
+  "label_scale": [
+    "",
+    "",
+    "",
+    [
+      1.0,
+      2.5
+    ],
+    [
+      0.5,
+      1.3
+    ],
+    [
+      0.5,
+      1.3
+    ],
+    "",
+    [
+      0.0,
+      0.2
+    ],
+    [
+      0.0,
+      0.2
+    ],
+    [
+      0.997543,
+      0.0098
+    ],
+    [
+      1.02913,
+      0.0971
+    ],
+    [
+      1.03704,
+      0.0556
+    ],
+    [
+      0.965517,
+      0.3448
+    ],
+    [
+      1.47273,
+      0.2182
+    ],
+    [
+      0.478916,
+      0.0331
+    ],
+    [
+      1.12766,
+      0.0851
+    ],
+    [
+      1.0,
+      0.15
+    ],
+    [
+      0.7,
+      1.3
+    ],
+    [
+      1.0,
+      0.03
+    ],
+    [
+      1.0,
+      0.15
+    ],
+    [
+      1.0,
+      0.05
+    ],
+    [
+      1.0,
+      0.2
+    ],
+    [
+      202.0,
+      605.0
+    ],
+    [
+      0.1,
+      4.0
+    ]
+  ],
+  "label_default": [
+    0.0,
+    0.275,
+    0.0,
+    1.9258,
+    1.0,
+    1.0,
+    5.0,
+    0.01,
+    0.01,
+    0.997543,
+    1.02913,
+    1.03704,
+    0.965517,
+    1.47273,
+    0.478916,
+    1.12766,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    202.0,
+    1.0
+  ],
+  "eep_interval": [
+    200,
+    150,
+    100,
+    150,
+    25,
+    75,
+    100,
+    600,
+    300
+  ],
+  "eep_max_rows": 631,
+  "eep_span": {
+    "keep_from": "ZAMS (EEP2, .eep row 202)",
+    "keep_to": "RGBtip (EEP5, .eep row 605)"
+  },
+  "eep_note": "label_scale['EEP'] is BOTH the retained span and the rescaling range: prepare_dsee_shard_eep.py drops every model outside it, so the kept rows use the full [0,1] after linear_rescale."
+}
