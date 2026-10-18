@@ -42,6 +42,20 @@ out = W.predict(eep=[400, 491, 550], mass=0.8)    # dict of central predictions:
 `predict()` returns the **central (medoid)** prediction by default; pass `raw=True` for the full sample cloud (the
 flow is a full conditional density, not a point estimate).
 
+
+## Make an isochrone
+
+`isochrone_W.py` builds a fixed-age isochrone with the exact recipe behind our cluster figures (age-inversion backbone +
+the flow's mode -- see the file's docstring for why each step is done the way it is):
+
+```bash
+python isochrone_W.py --age 12.5 --set FeH=-2.27 --plot iso.png     # metal-poor, 12.5 Gyr
+```
+```python
+from isochrone_W import w_isochrone, WEmulator, AgeHead
+iso = w_isochrone(WEmulator(), AgeHead(), WEmulator().fmt["label_default"], age_gyr=12.5)   # dict: eep, mass, log_Teff, log_L, ...
+```
+
 ## Install the full package (optional)
 
 To use the rest of the CONF1DENCE pipeline on the new machine:
