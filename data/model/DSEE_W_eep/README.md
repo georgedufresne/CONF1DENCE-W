@@ -30,3 +30,31 @@ subgiant and giant branches. The cosine learning rate was the change that put it
 
 The age head (v4) is the weakest piece and is worth retraining; W's structural predictions (Teff, L, g, R, core) are
 the strong part.
+
+## Age head calling convention (age_head_v4.pt)
+
+W predicts a star's POSITION along a track; `age_head_v4.pt` gives the matching age. It is an MLP (`layers`=5 x
+`hidden`=512, SiLU) with a strict input/output layout (all constants are IN the checkpoint):
+
+    input x (length 24), in THIS order:
+      [ (theta[i] - mu[i]) / sd[i]   for the 22 physics params, in label_header[:22] order ]   <- physics FIRST,
+      + [ (mass - 0.1) / 3.9 ]                                                                   standardised by the
+      + [ (EEP  - 202.0) / 403.0 ]                                                               head's OWN mu/sd
+    output = net(x) * ys + ym   =   log10(age / years)                                           then mass, then EEP
+
+Checkpoint keys: `state_dict, theta` (the 22 names, == label_header[:22]), `mu, sd` (per-physics standardisation),
+`ym`(=8.8938), `ys`(=0.9241), `hidden, layers`. Use `predict_W.AgeHead`:
+
+    from predict_W import WEmulator, AgeHead
+    ah = AgeHead()
+    ah.age_gyr(eep=[454, 605], mass=1.0, phys22=WEmulator().fmt["label_default"][:22])   # -> ~[10.6, 12.0] Gyr
+
+or `python predict_W.py --eep 202:605:1 --mass 1.0 --age`.
+
+Common mistake (the ~10x-too-young symptom): feeding raw or format-normalised physics instead of `(theta-mu)/sd`. The
+net then sees ~its training mean and returns ~`10**ym` = 0.78 Gyr for every star -- monotonic but ~10x low. Also note
+EEP and mass go at the END, not the front. To build a fixed-age isochrone you invert age(EEP, mass) for the mass at
+each EEP (age falls monotonically with mass at fixed EEP -- the well-conditioned direction).
+
+Caveat: the v4 head is the weakest piece of the pipeline and is worth retraining; W's structural outputs are the strong
+part.
