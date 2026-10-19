@@ -22,9 +22,17 @@ As a library:
   out = W.predict(eep=[400,491,550], mass=[0.8,0.8,0.8])     # dict: log_Teff, log_L, ...  (central/medoid values)
 """
 from __future__ import annotations
-import argparse, json, os, sys
+import argparse, json, os, sys, warnings
 import numpy as np, torch, zuko
 from torch import nn
+
+# W was trained with zuko 1.2.0. The spline-flow (NSF) parameterisation differs between zuko versions, so a DIFFERENT
+# version loads these exact weights WITHOUT error yet produces wrong predictions ("valid-looking but bad" isochrones).
+# This is the usual cause of bad output from this package -- pin the version: pip install "zuko==1.2.0".
+_ZUKO_OK = "1.2.0"
+if zuko.__version__ != _ZUKO_OK and os.environ.get("W_IGNORE_ZUKO") != "1":
+    warnings.warn(f"\n*** W needs zuko=={_ZUKO_OK} but you have zuko {zuko.__version__}. The flow will load but give WRONG "
+                  f"results. Run:  pip install \"zuko=={_ZUKO_OK}\"  (set W_IGNORE_ZUKO=1 to override). ***\n", stacklevel=2)
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 DEF_CKPT = os.path.join(HERE, "data", "model", "DSEE_W_eep", "best_rmse.pt")

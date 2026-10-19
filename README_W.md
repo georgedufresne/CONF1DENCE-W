@@ -23,10 +23,13 @@ scripts/dsee_train/                  the trainer used for W (train_dsee.py, flow
 ```
 The large original models (OG, etc.) and the raw shards are **not** included — only W.
 
+
+> **Version note:** W was trained with **zuko 1.2.0**. A different zuko version loads the same weights without error but produces WRONG curves ("valid-looking but bad" isochrones) -- this is the usual cause. Check with `python -c "import zuko; print(zuko.__version__)"`; if it is not 1.2.0, run `pip install "zuko==1.2.0"`.
+
 ## Use it (no install needed for prediction)
 
 ```bash
-pip install torch zuko numpy          # the only requirements for predict_W.py
+pip install torch "zuko==1.2.0" numpy          # the only requirements for predict_W.py
 python predict_W.py --eep 202:605:1 --mass 0.85          # a 0.85 Msun track, default physics
 python predict_W.py --eep 300,400,491,550 --mass 0.8 --out pred.npz
 python predict_W.py --eep 400 --mass 1.0 --set FeH=-1.0 "Mixing Length=1.9"   # your own physics
